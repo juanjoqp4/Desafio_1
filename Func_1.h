@@ -75,3 +75,7 @@ void Deleter(int orden){
     mat = nullptr;
 }
 //Fin
+
+void Relleno(int a){
+    //Mi moto alpina derrapante
+}
