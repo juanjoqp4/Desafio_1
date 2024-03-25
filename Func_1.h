@@ -76,6 +76,3 @@ void Deleter(int orden){
 }
 //Fin
 
-void Relleno(int a){
-    //Mi moto alpina derrapante
-}
