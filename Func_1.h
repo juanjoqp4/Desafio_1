@@ -4,7 +4,8 @@
 #endif // FUNC_1_H
 
 #include <iostream>     //Entrada y salida estandar (cout y cin)
-#include<stdlib.h>      //Manejo de memoria dinamica (new y delete)
+#include <stdlib.h>      //Manejo de memoria dinamica (new y delete)
+#include <string.h>
 
 using namespace std;
 
@@ -31,7 +32,7 @@ void Graph(int matriz){
 //Funcion para inicializar l@s matrices / arreglos
 int User_Bob(){
     unsigned short int est, orden;              //No se necesitan numeros negativos ni valores muy grandes
-    cout << "Digite numero de estructuras: ";
+    cout << "Digite numero de estructuras para X: ";
     cin >> est;
     pref = new int [est];                       //pref se encarga de guardar el orden de cada matriz
     k = new int [5];
@@ -151,7 +152,7 @@ void Rule_K(int num_matrices){
     columna = Comp(columna, orden);
     k[1] = columna;
 
-    cout << "Digite -1 para mayor o 1 para menor: ";
+    cout << "Digite -1 para mayor / menor o 1 para menor / mayor: ";
     cin >> m1;
     while ((m1 != 1) && (m1 != -1)){
         cout << "Error\nDigite -1 para mayor o 1 para menor: ";
@@ -159,12 +160,41 @@ void Rule_K(int num_matrices){
     }
     k[3] = m1;
 
-    cout << "Digite -1 para mayor o 1 para menor: ";
-    cin >> m2;
-    while ((m2 != 1) && (m2 != -1)){
-        cout << "Error\nDigite -1 para mayor o 1 para menor: ";
-        cin >> m2;
-    }
+    if (m1 == 1) m2 = -1;
+    else m2 = 1;
     k[4] = m2;
+}
+//Fin
+
+
+//Funcion para validar la apertura de X
+void Locked(int num_matrices){
+    bool comp = false;
+    int backup = 0, backup_2 = 0, fila = k[0] - 1, column = k[1] - 1, sec = 0;
+    if (k[3] == -1) sec = -1;           //sec indica si la secuencia es mayor / menor(-1 / 1 /true) o menor / mayor(1 / -1 / false)
+    else sec = 1;
+
+    for (int i = 0; i < num_matrices - 1; i++){
+        comp = false;
+        while (comp == false){
+
+            backup = mat[i][fila][column];
+            backup_2 = mat[i + 1][fila][column];
+
+            if (sec == -1){
+
+                if(backup > backup_2){
+                    comp = true;
+                }else Rotation(i + 1);
+
+            } else {
+                if(backup < backup_2){
+                    comp = true;
+                }else Rotation(i + 1);
+            }
+        }
+        if (sec == -1) sec += 2;
+        else sec -= 2;
+    }
 }
 //Fin
