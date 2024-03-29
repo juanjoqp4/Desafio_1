@@ -98,7 +98,6 @@ void Value(int matriz){
 
 //Funcion para rotar la matriz
 void Rotation(int matriz){
-<<<<<<< HEAD
     int backup = 0, help = 0, orden = pref[matriz], min = 0, max = 0;
     for(int capa = 0; capa < orden / 2; capa++){
 
@@ -124,31 +123,6 @@ void Rotation(int matriz){
 }
 //Fin
 
-
-=======
-
-    int orden = pref[matriz], backup = 0, backup_2 = 0, help = 0, cont = 0;
-
-    for(int i = 0; i < orden; i++){
-        for(int j = (orden - 1) - cont; j > cont; j--){
-            backup = mat[matriz][i][j];                                             //backup : Toma el valor de la posicion de la matriz que sera reemplazada
-            mat[matriz][i][j] = mat[matriz][i + help][i];                                 //help : Sirve como soporte para i y j. Cuando itera i / j siguen referencian una fila / columna por la que ya pasaron,
-            backup_2 = mat[matriz][j][j + help];                                        //por lo que necesitan avanzar sin aumentar su valor en el ciclo , entonces help cubre esa necesidad
-            mat[matriz][j][j + help] = backup;
-
-            backup = mat[matriz][j + help][i + help];
-            mat[matriz][j + help][i + help] = backup_2;
-
-            mat[matriz][i + help][i] = backup;
-            help++;
-        }
-        cont++;                     //cont : Cuando j finaliza con todos los elementos columna de una fila, no vuelve a ella, pero cuando acaba su ciclo vuelve siempre
-        help = i;                   //a la primera. cont evita eso y en vez de volver a n, vuelve a la columna que sigue
-    }
-}
-//Fin
-
->>>>>>> 421f30e386fe3af3a9d8ec5edd85e6853708ff4f
 //Funcion encargada de validaciones de rango
 int Comp (int var, int range){
     while ((var > range) || (var < 1)){
@@ -195,16 +169,10 @@ void Rule_K(int num_matrices){
 }
 //Fin
 
-
 //Funcion para validar la apertura de X
 void Locked(int num_matrices){
-<<<<<<< HEAD
     bool comp = false, invalid = false;
     int backup = 0, backup_2 = 0, fila = k[0] - 1, column = k[1] - 1, sec = 0, cont = 0, Escen = 1, DIF = 0, DIF_sup = 0;
-=======
-    bool comp = false;
-    int backup = 0, backup_2 = 0, fila = k[0] - 1, column = k[1] - 1, sec = 0;
->>>>>>> 421f30e386fe3af3a9d8ec5edd85e6853708ff4f
     if (k[3] == -1) sec = -1;           //sec indica si la secuencia es mayor / menor(-1 / 1 /true) o menor / mayor(1 / -1 / false)
     else sec = 1;
 
@@ -212,7 +180,6 @@ void Locked(int num_matrices){
         comp = false;
         while (comp == false){
 
-<<<<<<< HEAD
             DIF = (pref[i] - pref[k[2] - 1]) / 2;
             DIF_sup = (pref[i + 1] - pref[k[2] - 1]) / 2;      //DIF indica la diferencia entre ordenes de la matriz i / i+1 y la estructura elegida, para que al referenciar posiciones sea proporcional al centro de cada una
 
@@ -261,25 +228,7 @@ void Locked(int num_matrices){
         else sec -= 2;
         cont++;
         Escen = 1;
-=======
-            backup = mat[i][fila][column];
-            backup_2 = mat[i + 1][fila][column];
-
-            if (sec == -1){
-
-                if(backup > backup_2){
-                    comp = true;
-                }else Rotation(i + 1);
-
-            } else {
-                if(backup < backup_2){
-                    comp = true;
-                }else Rotation(i + 1);
-            }
-        }
-        if (sec == -1) sec += 2;
-        else sec -= 2;
->>>>>>> 421f30e386fe3af3a9d8ec5edd85e6853708ff4f
     }
 }
 //Fin
+
