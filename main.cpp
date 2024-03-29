@@ -39,6 +39,7 @@ int main()
 }
 
 
+<<<<<<< HEAD
 //PROBLEMA : Al pensar que la secuencia la podia determinar ell usuario, surgia un problema en cuanto a las rotaciones, ya que al buscar
         //un numero mas grande que el de mayor valor en la estructura entraba en un bucle infinito, por lo que la secuencia debia ser intercalada
 
@@ -53,3 +54,9 @@ void Dimension(int matriz){
 }
 //Fin
 */
+=======
+//PROBLEMA : Al pensar que la secuencia la podia determinar el usuario, surgia un problema en cuanto a las rotaciones, ya que al buscar
+        //un numero mas grande que el de mayor valor en la estructura entraba en un bucle infinito, por lo que la secuencia debia ser intercalada
+
+//PROBLEMA : Revisar la operacion en [3][2]
+>>>>>>> 421f30e386fe3af3a9d8ec5edd85e6853708ff4f
