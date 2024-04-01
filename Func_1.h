@@ -167,8 +167,21 @@ void Rule_K(int num_matrices){
     columna = Comp(columna, orden);         //Se comprueba que corresponda al orden de esa matriz
     k[1] = columna;
 
-    cout << "Digite -1 para mayor / menor o 1 para menor / mayor: ";                  //En base al analisis realizado y despues de numerosas pruebas, se llego a la conclusion
-    cin >> m1;                                                                                                   // que la secuencia mayor / menor o viceversa debe ser intercalada, por lo que segun esta eleccion se determina el otro valor
+    while(mat[est - 1][fila - 1][columna - 1] == 0){
+        cout << "Esta coordenada corresponde al centro de la matriz, digite otra diferente" << endl;
+        cout << "Digite Fila: ";
+        cin >> fila;
+        fila = Comp(fila, orden);               //Se comprueba que corresponda al orden de esa matriz
+        k[0] = fila;
+
+        cout << "Digite Columna: ";
+        cin >> columna;
+        columna = Comp(columna, orden);         //Se comprueba que corresponda al orden de esa matriz
+        k[1] = columna;
+    }
+
+    cout << "Digite -1 para mayor / menor o 1 para menor / mayor: ";        //En base al analisis realizado y despues de numerosas pruebas, se llego a la conclusion
+    cin >> m1;                                                              // que la secuencia mayor / menor o viceversa debe ser intercalada, por lo que segun esta eleccion se determina el otro valor
     while ((m1 != 1) && (m1 != -1)){
         cout << "Error\nDigite -1 para mayor o 1 para menor: ";
         cin >> m1;
@@ -196,16 +209,31 @@ void Locked(int num_matrices){
         comp = false;
         while (comp == false){
 
-            DIF = (pref[i] - PIN) / 2;
-            DIF_sup = (pref[i + 1] - PIN) / 2;      //DIF y DIF_sup indican la diferencia entre ordenes de la matriz i / i + 1 y
-                                                    //la estructura elegida (PIN), para que al indicar posiciones sean proporcionales al centro de cada una
-            if (DIF < 0) DIF *= -1;     //La diferencia no puede ser negativa
+            while((fila > pref[i + 1]) || (column > pref[i + 1])){
+                cout << endl << "Las dimensiones podrian no corresponder con la matriz " << i + 2 <<",\npor lo que su orden aumentara" << endl;
+                Dimension(i + 1);
+            }                           //Se aplica por si las coordenadas digitadas superan el orden de algunas matrices
 
-            if (((cont != 0) || (pref[i] != PIN)) && (pref[i] != PIN)) backup = mat[i][fila + DIF][column + DIF];       //Puede haber un escenario en que la matriz i haya cambiado de tamaño, por lo que se debe tomar como una de distinto tamaño
-            else backup = mat[i][fila][column];         //En el caso de que sea del mismo orden a PIN, no hay necesidad de aplicar proporciones
+            DIF = (pref[i] - PIN) / 2;                                  //DIF y DIF_sup indican la diferencia entre ordenes de la matriz i / i + 1 y
+            DIF_sup = (pref[i + 1] - PIN) / 2;                     //la estructura elegida (PIN), para que al indicar posiciones sean proporcionales al centro de cada una
 
-            if(PIN != pref[i + 1]) backup_2 = mat[i + 1][fila + DIF_sup][column + DIF_sup];     //Si son de diferente orden se aplica la diferencia
-            else backup_2 = mat[i + 1][fila][column];
+            if ((((cont != 0) || (pref[i] != PIN)) && (pref[i] != PIN))){   //Puede haber un escenario en que la matriz i haya cambiado de tamaño, por lo que se debe tomar como una de distinto tamaño
+
+                if((fila + DIF >= 0) && (column + DIF >= 0)) backup = mat[i][fila + DIF][column + DIF];
+                else if((fila + DIF < 0) && (column + DIF >= 0)) backup = mat[i][fila + DIF][column];                        //En caso de que alguna de las coordenadas menos la diferencia sean menores a 0,
+                else if ((column + DIF < 0) && (fila + DIF >= 0)) backup = mat[i][fila][column + DIF];                    //no se aplicara la diferencia
+                else backup = mat[i][fila][column];
+
+            }else backup = mat[i][fila][column];         //En el caso de que sea del mismo orden a PIN, no hay necesidad de aplicar proporciones
+
+            if(PIN != pref[i + 1]){     //Si son de diferente orden se aplica la diferencia
+
+                if((fila + DIF_sup >= 0) && (column + DIF_sup >= 0)) backup_2 = mat[i + 1][fila + DIF_sup][column + DIF_sup];
+                else if((fila + DIF_sup < 0) && (column + DIF_sup >= 0)) backup_2 = mat[i + 1][fila + DIF_sup][column];                        //En caso de que alguna de las coordenadas menos la diferencia sean menores a 0,
+                else if ((column + DIF_sup < 0) && (fila + DIF_sup >= 0)) backup_2 = mat[i + 1][fila][column + DIF_sup];                    //no se aplicara la diferencia
+                else backup_2 = mat[i + 1][fila][column];
+
+            }else backup_2 = mat[i + 1][fila][column];
 
             if(Escen < 4){                  //Indica si la matriz dio todas las rotaciones necesarias
                 if (sec == -1){                 //Si la secuencia indica mayor / menor aplica el siguiente condicional
@@ -250,4 +278,3 @@ void Locked(int num_matrices){
     }
 }
 //Fin
-

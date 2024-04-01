@@ -37,18 +37,3 @@ int main()
     cout << endl <<" --> Programa Finalizado" << endl;
     return 0;
 }
-
-//PROBLEMA : Al pensar que la secuencia la podia determinar el usuario, surgia un problema en cuanto a las rotaciones, ya que al buscar
-        //un numero mas grande que el de mayor valor en la estructura entraba en un bucle infinito, por lo que la secuencia debia ser intercalada
-
-/*          Al no comprender bien el enunciado, pense que podria haber un escenario en el que la matriz cambiaba su tamaño
-//Funcion encargada de cambiar el tamaño de una matriz
-void Dimension(int matriz){
-    mat[matriz] = new int *[pref[matriz] += 2];           //Aqui se le asigna numero de filas a la matriz del tamaño de estructura #matriz
-    for(int j = 0; j < pref[matriz]; j++){
-        mat[matriz][j] = new int [pref[matriz]];      //Se le asigna numero de columnas a cada fila del tamaño de estructura i
-    }
-    Value(matriz);
-}
-//Fin
-*/
