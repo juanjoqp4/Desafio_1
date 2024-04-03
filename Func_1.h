@@ -180,16 +180,20 @@ void Rule_K(int num_matrices){
         k[1] = columna;
     }
 
-    cout << "Digite -1 para mayor / menor o 1 para menor / mayor: ";        //En base al analisis realizado y despues de numerosas pruebas, se llego a la conclusion
-    cin >> m1;                                                              // que la secuencia mayor / menor o viceversa debe ser intercalada, por lo que segun esta eleccion se determina el otro valor
+    cout << "Digite -1 o 1 para la secuencia: ";
+    cin >> m1;
     while ((m1 != 1) && (m1 != -1)){
         cout << "Error\nDigite -1 para mayor o 1 para menor: ";
         cin >> m1;
     }
     k[3] = m1;
 
-    if (m1 == 1) m2 = -1;
-    else m2 = 1;
+    cout << "Digite -1 o 1 para la secuencia: ";
+    cin >> m2;
+    while ((m2 != 1) && (m2 != -1)){
+        cout << "Error\nDigite -1 para mayor o 1 para menor: ";
+        cin >> m2;
+    }
     k[4] = m2;
 }
 //Fin
@@ -271,8 +275,8 @@ void Locked(int num_matrices){
 
             Escen++;            //Contabiliza el numero de rotaciones
         }
-        if (sec == -1) sec += 2;        //Por cada condicion que cumple cambia la secuencia de 1 a -1 o viceversa
-        else sec -= 2;
+        if (cont % 2 == 0) sec = k[4];              //Si cont es 0 por ejm (primera iteracion), toma el valor en la siguiente posicion de K
+        else sec = k[3];                            //Cuando sea impar toma la anterior
         cont++;                 //Sirve para indicar la primera vuelta
         Escen = 0;          //Toma valor 0 para contabilizar las vueltas de la nueva comparacion
     }
