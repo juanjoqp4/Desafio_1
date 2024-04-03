@@ -209,7 +209,7 @@ void Locked(int num_matrices){
 
 
     PIN = pref[k[2] - 1];               //Se guarda el orden de la primera matriz, asi no se pierde la proporcion entre matrices aunque la de referencia cambie su tamaño
-    for (int i = 0; i < num_matrices - 1; i++){
+    for (int i = k[2] - 1; i < num_matrices - 1; i++){              //Inicia desde la estructura deseada
         comp = false;
         while (comp == false){
 
