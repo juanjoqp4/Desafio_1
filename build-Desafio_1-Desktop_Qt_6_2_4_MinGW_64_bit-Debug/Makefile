@@ -291,6 +291,7 @@ Makefile: ../Desafio_1/Desafio_1.pro C:/Qt/6.2.4/mingw_64/mkspecs/win32-g++/qmak
 		C:/Qt/6.2.4/mingw_64/mkspecs/features/qt_config.prf \
 		C:/Qt/6.2.4/mingw_64/mkspecs/win32-g++/qmake.conf \
 		C:/Qt/6.2.4/mingw_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		C:/Qt/6.2.4/mingw_64/mkspecs/features/exclusive_builds.prf \
 		C:/Qt/6.2.4/mingw_64/mkspecs/features/toolchain.prf \
 		C:/Qt/6.2.4/mingw_64/mkspecs/features/default_pre.prf \
@@ -310,7 +311,6 @@ Makefile: ../Desafio_1/Desafio_1.pro C:/Qt/6.2.4/mingw_64/mkspecs/win32-g++/qmak
 		C:/Qt/6.2.4/mingw_64/mkspecs/features/yacc.prf \
 		C:/Qt/6.2.4/mingw_64/mkspecs/features/lex.prf \
 		../Desafio_1/Desafio_1.pro \
-		.qmake.stash \
 		C:/Qt/6.2.4/mingw_64/mkspecs/features/build_pass.prf
 	$(QMAKE) -o Makefile ..\Desafio_1\Desafio_1.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
 C:/Qt/6.2.4/mingw_64/mkspecs/features/spec_pre.prf:
@@ -534,6 +534,7 @@ C:/Qt/6.2.4/mingw_64/mkspecs/features/qt_functions.prf:
 C:/Qt/6.2.4/mingw_64/mkspecs/features/qt_config.prf:
 C:/Qt/6.2.4/mingw_64/mkspecs/win32-g++/qmake.conf:
 C:/Qt/6.2.4/mingw_64/mkspecs/features/spec_post.prf:
+.qmake.stash:
 C:/Qt/6.2.4/mingw_64/mkspecs/features/exclusive_builds.prf:
 C:/Qt/6.2.4/mingw_64/mkspecs/features/toolchain.prf:
 C:/Qt/6.2.4/mingw_64/mkspecs/features/default_pre.prf:
@@ -553,7 +554,6 @@ C:/Qt/6.2.4/mingw_64/mkspecs/features/exceptions.prf:
 C:/Qt/6.2.4/mingw_64/mkspecs/features/yacc.prf:
 C:/Qt/6.2.4/mingw_64/mkspecs/features/lex.prf:
 ../Desafio_1/Desafio_1.pro:
-.qmake.stash:
 C:/Qt/6.2.4/mingw_64/mkspecs/features/build_pass.prf:
 qmake: FORCE
 	@$(QMAKE) -o Makefile ..\Desafio_1\Desafio_1.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"

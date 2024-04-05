@@ -53,7 +53,9 @@ OBJECTS_DIR   = release
 SOURCES       = ..\Desafio_1\main.cpp 
 OBJECTS       = release/main.o
 
-DIST          =  Func_1.h ..\Desafio_1\main.cpp
+DIST          =  Func_1.h \
+		Func_Constructoras.h \
+		Func_Operadoras.h ..\Desafio_1\main.cpp
 QMAKE_TARGET  = Desafio_1
 DESTDIR        = release\ #avoid trailing-slash linebreak
 TARGET         = Desafio_1.exe
@@ -101,7 +103,8 @@ compiler_clean:
 
 ####### Compile
 
-release/main.o: ../Desafio_1/main.cpp ../Desafio_1/Func_1.h
+release/main.o: ../Desafio_1/main.cpp ../Desafio_1/Func_Constructoras.h \
+		../Desafio_1/Func_Operadoras.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\main.o ..\Desafio_1\main.cpp
 
 ####### Install

@@ -1,8 +1,8 @@
-#include <Func_1.h>
+#include <Func_Constructoras.h>
 
 int main()
 {
-    string rep;
+    char rep;
     do                  //Su finalidad es que se repita o no el programa una vez finalice
     {
 
@@ -30,9 +30,8 @@ int main()
     Eraser(num_matrices);       //Libera memoria reservada
 
     cout << "Digite 0 para salir o cualquier otra tecla para repetir: ";
-    cin.ignore();
-    getline(cin , rep);                         //Con 0 repite el programa
-    }while(rep != "0");
+    cin >> rep;                         //Con 0 repite el programa, al ser char solo acepta el primer digito
+    }while(rep != '0');
 
     cout << endl <<" --> Programa Finalizado" << endl;
     return 0;

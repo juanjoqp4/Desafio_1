@@ -1,17 +1,15 @@
-#ifndef FUNC_1_H
-#define FUNC_1_H
+#ifndef FUNC_OPERADORAS_H
+#define FUNC_OPERADORAS_H
 
-#endif // FUNC_1_H
+#endif // FUNC_OPERADORAS_H
 
 #include <iostream>     //Entrada y salida estandar (cout y cin)
 #include <stdlib.h>      //Manejo de memoria dinamica (new y delete)
-#include <string.h>     //Sirve para la eleccion de repetir o no xD
 
 using namespace std;
 
 int ***mat;                 //Estructura de datos M
 int *pref, *k;              //pref guarda el orden de cada matriz en M //k es la encargada de guarda la entrada K
-
 
 //Funcion para imprimir la matriz ( Meramente grafica )
 void Graph(int matriz){
@@ -26,85 +24,6 @@ void Graph(int matriz){
         cout << endl;
     }
     cout << endl;
-}
-//Fin
-
-//Funcion para inicializar l@s matrices / arreglos
-int User_Bob(){
-    unsigned short int est, orden;              //No se necesitan numeros negativos ni valores muy grandes
-    cout << "Digite numero de estructuras para X: ";
-    cin >> est;
-    pref = new int [est];                       //pref se encarga de guardar el orden de cada matriz
-    k = new int [5];
-
-    cout << "Digite el orden de cada una" << endl;
-    for(int i = 0; i < est; i++){                               //Este ciclo se encarga de darle a cada matriz un orden
-        cout << "Orden para estructura #" << i + 1 << " : ";
-        cin >> orden;
-        while ((orden < 3) || (orden % 2 == 0)){                                                            //Validacion
-            cout << "Orden invalido, vuelva a intentarlo" << endl << "Estructura #" << i + 1 << " : ";
-            cin >> orden;
-        }
-        pref[i] = orden;            //En la posicion i se guarda n orden, se podria decir que pref esta alineada a mat (primer nivel)
-    }
-
-    mat = new int **[est];              //CERRADURA X
-    for (int i = 0; i < est; i++){      //i referencia cada estructura  (1)
-        mat[i] = new int *[pref[i]];           //Aqui se le asigna numero de filas a la matriz del tamaño de estructura i (2)
-        for(int j = 0; j < pref[i]; j++){
-            mat[i][j] = new int [pref[i]];      //Se le asigna numero de columnas a cada fila del tamaño de estructura i (3)
-        }
-    }
-
-    return est;         //Retorna el numero de matrices que hay en el arreglo
-}
-//Fin
-
-//Funcion para liberar memoria dinamica
-void Eraser(int num_matrices){
-    for(int i = 0; i < num_matrices; i++){
-        for(int j = 0; j < pref[i]; j++){       //Itera segun el orden de la matriz referenciada por i
-            delete[] mat[i][j];             //Libera cada columna por fila (nivel 3)
-        }
-        delete[] mat[i];            //Libera cada fila (nivel 2)
-    }
-    delete[] mat;           //Libera cada espacio para matrices
-    mat = nullptr;
-
-    delete[] k;         //Libera el espacio reservado para k
-    k = nullptr;
-
-    delete[] pref;      //Libera el espacio reservado para pref
-    pref = nullptr;
-}
-//Fin
-
-//Funcion que añade valores a cada una de las matrices
-void Value(int matriz){
-    int cont = 1, lineal = pref[matriz] / 2;        //Tomo la mitad del orden en matriz, al ser impar siempre me va a dar
-                                                    //el punto medio de esa matriz, ejm: en una 7x7, va de 0 a 6 y su mitad es [3][3]
-    for(int i = 0; i < pref[matriz]; i++){
-        for(int j = 0; j < pref[matriz]; j++){
-            if((i == lineal) && (j == lineal)){         //Si se encuentra en la mitad de la matriz asigna valor 0 a esa posicion
-                mat[matriz][i][j] = 0;
-            } else {
-                mat[matriz][i][j] = cont;
-                cont++;
-            }
-        }                                           //Gracias al doble ciclo cada espacio por fila es ocupado por un numero consecutivo
-    }
-}
-//Fin
-
-//Funcion encargada de cambiar el tamaño de una matriz
-void Dimension(int matriz){
-    mat[matriz] = new int *[pref[matriz] += 2];           //Aqui se le asigna numero de filas a la matriz del tamaño de estructura #matriz
-    for(int j = 0; j < pref[matriz]; j++){
-        mat[matriz][j] = new int [pref[matriz]];      //Se le asigna numero de columnas a cada fila del nuevo tamaño de estructura i
-    }
-    Value(matriz);                              //Se le agregan los valores a la nueva matriz
-    //cout << " / " << pref[matriz] << endl;
-    //Graph(matriz);                            //Pruebas
 }
 //Fin
 
@@ -135,6 +54,33 @@ void Rotation(int matriz){
 }
 //Fin
 
+//Funcion que añade valores a cada una de las matrices
+void Value(int matriz){
+    int cont = 1, lineal = pref[matriz] / 2;        //Tomo la mitad del orden en matriz, al ser impar siempre me va a dar
+                                                    //el punto medio de esa matriz, ejm: en una 7x7, va de 0 a 6 y su mitad es [3][3]
+    for(int i = 0; i < pref[matriz]; i++){
+        for(int j = 0; j < pref[matriz]; j++){
+            if((i == lineal) && (j == lineal)){         //Si se encuentra en la mitad de la matriz asigna valor 0 a esa posicion
+                mat[matriz][i][j] = 0;
+            } else {
+                mat[matriz][i][j] = cont;
+                cont++;
+            }
+        }                                           //Gracias al doble ciclo cada espacio por fila es ocupado por un numero consecutivo
+    }
+}
+//Fin
+
+//Funcion encargada de cambiar el tamaño de una matriz
+void Dimension(int matriz){
+    mat[matriz] = new int *[pref[matriz] += 2];           //Aqui se le asigna numero de filas a la matriz del tamaño de estructura #matriz
+    for(int j = 0; j < pref[matriz]; j++){
+        mat[matriz][j] = new int [pref[matriz]];      //Se le asigna numero de columnas a cada fila del nuevo tamaño de estructura i
+    }
+    Value(matriz);                              //Se le agregan los valores a la nueva matriz
+}
+//Fin
+
 //Funcion encargada de validaciones de rango
 int Comp (int var, int range){
     while ((var > range) || (var < 1)){
@@ -142,59 +88,6 @@ int Comp (int var, int range){
         cin >> var;
     }
     return var;     //Retorna el valor que cumple con las condiciones
-}
-//Fin
-
-//Funcion encargada de construir la regla K
-void Rule_K(int num_matrices){
-
-    int fila = 0, columna = 0, est = 0, m1 = 0, m2 = 0, orden = 0;          //No me gusta tenerlos divagando con valores sin sentido
-
-    cout << "Regla K" << endl << "Digite # de estructura: ";
-    cin >> est;                                                 //Al comprobar primero la estructura deseada, puedo determinar facilmente su orden
-    est = Comp(est, num_matrices);                              // y realizar las respectivas validaciones
-    k[2] = est;                         //Se añade al arreglo
-
-    orden = pref[est - 1];
-
-    cout << "Digite Fila: ";
-    cin >> fila;
-    fila = Comp(fila, orden);               //Se comprueba que corresponda al orden de esa matriz
-    k[0] = fila;
-
-    cout << "Digite Columna: ";
-    cin >> columna;
-    columna = Comp(columna, orden);         //Se comprueba que corresponda al orden de esa matriz
-    k[1] = columna;
-
-    while(mat[est - 1][fila - 1][columna - 1] == 0){
-        cout << "Esta coordenada corresponde al centro de la matriz, digite otra diferente" << endl;
-        cout << "Digite Fila: ";
-        cin >> fila;
-        fila = Comp(fila, orden);               //Se comprueba que corresponda al orden de esa matriz
-        k[0] = fila;
-
-        cout << "Digite Columna: ";
-        cin >> columna;
-        columna = Comp(columna, orden);         //Se comprueba que corresponda al orden de esa matriz
-        k[1] = columna;
-    }
-
-    cout << "Digite -1 o 1 para la secuencia: ";
-    cin >> m1;
-    while ((m1 != 1) && (m1 != -1)){
-        cout << "Error\nDigite -1 para mayor o 1 para menor: ";
-        cin >> m1;
-    }
-    k[3] = m1;
-
-    cout << "Digite -1 o 1 para la secuencia: ";
-    cin >> m2;
-    while ((m2 != 1) && (m2 != -1)){
-        cout << "Error\nDigite -1 para mayor o 1 para menor: ";
-        cin >> m2;
-    }
-    k[4] = m2;
 }
 //Fin
 
@@ -240,7 +133,7 @@ void Locked(int num_matrices){
             }else backup_2 = mat[i + 1][fila][column];
 
             if(Escen < 4){                  //Indica si la matriz dio todas las rotaciones necesarias
-                if (sec == -1){                 //Si la secuencia indica mayor / menor aplica el siguiente condicional
+                if (sec == 1){                 //Si la secuencia indica mayor / menor aplica el siguiente condicional
 
                     if(backup > backup_2){
                         comp = true;
@@ -252,7 +145,7 @@ void Locked(int num_matrices){
                     }else Rotation(i + 1);
                 }
             }else{                      //Si ya dio todas las vueltas necesarias, ahora la que gira es la matriz i
-                if (sec == -1){
+                if (sec == 1){
 
                     if(backup > backup_2){
                         comp = true;
@@ -265,10 +158,10 @@ void Locked(int num_matrices){
                 }
             }
 
-            if ((Escen > 7) && (sec == - 1)){   //Si la secuencia indica mayor / menor, el orden de la matriz i cambia para poder cumplir con esa condicion
+            if ((Escen > 7) && (sec == 1)){   //Si la secuencia indica mayor / menor, el orden de la matriz i cambia para poder cumplir con esa condicion
                 Dimension(i);
                 Escen = 0;
-            }else if ((Escen > 7) && (sec == 1)){   //Si la secuencia indica menor / mayor, el orden de la matriz i cambia para poder cumplir con esa condicion
+            }else if ((Escen > 7) && (sec == -1)){   //Si la secuencia indica menor / mayor, el orden de la matriz i cambia para poder cumplir con esa condicion
                 Dimension(i + 1);
                 Escen = 0;          //Escen toma valor 0, para poder comprobar la matriz "nueva"
             }
@@ -280,5 +173,24 @@ void Locked(int num_matrices){
         cont++;                 //Sirve para indicar la primera vuelta
         Escen = 0;          //Toma valor 0 para contabilizar las vueltas de la nueva comparacion
     }
+}
+//Fin
+
+//Funcion para liberar memoria dinamica
+void Eraser(int num_matrices){
+    for(int i = 0; i < num_matrices; i++){
+        for(int j = 0; j < pref[i]; j++){       //Itera segun el orden de la matriz referenciada por i
+            delete[] mat[i][j];             //Libera cada columna por fila (nivel 3)
+        }
+        delete[] mat[i];            //Libera cada fila (nivel 2)
+    }
+    delete[] mat;           //Libera cada espacio para matrices
+    mat = nullptr;
+
+    delete[] k;         //Libera el espacio reservado para k
+    k = nullptr;
+
+    delete[] pref;      //Libera el espacio reservado para pref
+    pref = nullptr;
 }
 //Fin
