@@ -5,7 +5,6 @@
 
 #include <iostream>     //Entrada y salida estandar (cout y cin)
 #include <stdlib.h>      //Manejo de memoria dinamica (new y delete)
-#include <string.h>     //Sirve para la eleccion de repetir o no xD
 
 using namespace std;
 
@@ -103,8 +102,6 @@ void Dimension(int matriz){
         mat[matriz][j] = new int [pref[matriz]];      //Se le asigna numero de columnas a cada fila del nuevo tamaño de estructura i
     }
     Value(matriz);                              //Se le agregan los valores a la nueva matriz
-    //cout << " / " << pref[matriz] << endl;
-    //Graph(matriz);                            //Pruebas
 }
 //Fin
 
@@ -183,7 +180,7 @@ void Rule_K(int num_matrices){
     cout << "Digite -1 o 1 para la secuencia: ";
     cin >> m1;
     while ((m1 != 1) && (m1 != -1)){
-        cout << "Error\nDigite -1 para mayor o 1 para menor: ";
+        cout << "Error\nDigite -1 para menor o 1 para mayor: ";
         cin >> m1;
     }
     k[3] = m1;
@@ -191,7 +188,7 @@ void Rule_K(int num_matrices){
     cout << "Digite -1 o 1 para la secuencia: ";
     cin >> m2;
     while ((m2 != 1) && (m2 != -1)){
-        cout << "Error\nDigite -1 para mayor o 1 para menor: ";
+        cout << "Error\nDigite -1 para menor o 1 para mayor: ";
         cin >> m2;
     }
     k[4] = m2;
@@ -240,7 +237,7 @@ void Locked(int num_matrices){
             }else backup_2 = mat[i + 1][fila][column];
 
             if(Escen < 4){                  //Indica si la matriz dio todas las rotaciones necesarias
-                if (sec == -1){                 //Si la secuencia indica mayor / menor aplica el siguiente condicional
+                if (sec == 1){                 //Si la secuencia indica mayor / menor aplica el siguiente condicional
 
                     if(backup > backup_2){
                         comp = true;
@@ -252,7 +249,7 @@ void Locked(int num_matrices){
                     }else Rotation(i + 1);
                 }
             }else{                      //Si ya dio todas las vueltas necesarias, ahora la que gira es la matriz i
-                if (sec == -1){
+                if (sec == 1){
 
                     if(backup > backup_2){
                         comp = true;
@@ -265,10 +262,10 @@ void Locked(int num_matrices){
                 }
             }
 
-            if ((Escen > 7) && (sec == - 1)){   //Si la secuencia indica mayor / menor, el orden de la matriz i cambia para poder cumplir con esa condicion
+            if ((Escen > 7) && (sec == 1)){   //Si la secuencia indica mayor / menor, el orden de la matriz i cambia para poder cumplir con esa condicion
                 Dimension(i);
                 Escen = 0;
-            }else if ((Escen > 7) && (sec == 1)){   //Si la secuencia indica menor / mayor, el orden de la matriz i cambia para poder cumplir con esa condicion
+            }else if ((Escen > 7) && (sec == -1)){   //Si la secuencia indica menor / mayor, el orden de la matriz i cambia para poder cumplir con esa condicion
                 Dimension(i + 1);
                 Escen = 0;          //Escen toma valor 0, para poder comprobar la matriz "nueva"
             }
